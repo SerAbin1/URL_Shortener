@@ -3,10 +3,10 @@ const sqlite3 = require('sqlite3').verbose();
 const { nanoid } = require('nanoid');
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 const db = new sqlite3.Database('./urls.db');
 
-app.use(express.json());
 
 db.run("CREATE TABLE IF NOT EXISTS urls (id TEXT PRIMARY KEY, long_url TEXT)", (err) => {
     if (err) console.error("Table creation error:", err.message);
